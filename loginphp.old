@@ -1,0 +1,53 @@
+<?php
+// Datos de conexión a la base de datos
+$servername = "localhost"; // Servidor de la base de datos (generalmente localhost)
+$username = "aledb"; // Tu usuario de la base de datos
+$password = "BN30tcDTX-OGm[rn"; // Tu contraseña de la base de datos
+$dbname = "carboneria_db"; // Nombre de tu base de datos
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener datos del formulario
+// Obtener datos del formulario (VERIFICANDO si existen las claves)
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Buscar usuario en la base de datos (usando parámetros preparados para evitar inyección SQL)
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE Email = ?");
+    $stmt->bind_param("s", $email); // "s" indica que el parámetro es un string
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        // Verificar contraseña
+        if (password_verify($password, $row['Contrasena'])) {
+            // Iniciar sesión
+            session_start();
+            $_SESSION['usuario'] = $email;
+            $_SESSION['rol'] = $row['Rol'];
+            header("Location: inicio\inicio.html");
+            exit();
+        } else {
+            // Contraseña incorrecta
+            echo "Contraseña incorrecta.";
+        }
+    } else {
+        // Usuario no encontrado
+        echo "Usuario no encontrado.";
+    }
+
+    $stmt->close(); // Cierra la declaración preparada
+} else {
+    echo "Faltan datos del formulario."; // Mensaje si no se enviaron los datos
+}
+
+$conn->close();
+?>

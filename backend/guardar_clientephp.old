@@ -1,0 +1,42 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+include 'conexion.php';
+
+// Verificar si los datos se enviaron por POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Leer los datos del formulario (formato application/x-www-form-urlencoded)
+    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+    $apellido = isset($_POST['apellido']) ? $_POST['apellido'] : '';
+    $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
+    $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+
+    // ... (código para validación de datos sin cambios)
+
+    // Verificar si el teléfono ya existe en la base de datos (sin cambios)
+
+    // Insertar datos en la base de datos
+    $stmt = $conn->prepare("INSERT INTO Clientes (Nombre, Apellido, Telefono, Direccion, Email) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $nombre, $apellido, $telefono, $direccion, $email);
+
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Cliente guardado correctamente"]);
+    } else {
+        echo json_encode(["error" => "Error al guardar cliente: " . $stmt->error]);
+    }
+
+    $stmt->close();
+} else {
+    echo json_encode(["error" => "Se requiere una solicitud POST"]);
+}
+
+$conn->close();
+?>

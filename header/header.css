@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    
+    /* Imagen de fondo */
+    background-image: url('../main/7a9ffa81-fbd3-49d8-9abd-23abe6100b34.jpg'); /* Ruta de la imagen */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+}
+
+header{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    
+}
+
+h2{
+    font-family: system-ui;
+    color: #d6d5d5;
+}
+
+.nav-list{
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+    margin-top: 10px;
+}
+.nav-list li a{
+    text-decoration: none;
+    color: rgb(246, 245, 245);
+}
+
+.abrir-menu {
+    height: 40px;
+    width: 120px;
+    display: none; /* Cambia a `block` o `inline-block` si deseas que se muestre */
+    font-size: 1.3rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    border: 2px solid #007BFF; /* Borde con color principal */
+    border-radius: 20px; /* Bordes redondeados */
+    background-color: #007BFF; /* Fondo principal */
+    color: #fff; /* Texto blanco */
+    transition: all 0.3s ease; /* Suaviza las transiciones */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.abrir-menu:hover {
+    background-color: #0056b3; /* Color de fondo más oscuro al pasar el cursor */
+    color: #fff; /* Mantiene el texto blanco */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Incrementa la sombra */
+}
+
+.abrir-menu:active {
+    transform: scale(0.95); /* Simula un clic con un ligero escalado */
+}
+
+.cerrar {
+    height: 40px;
+    width: 120px;
+    display: none; /* Cambia a `block` o `inline-block` para mostrarlo */
+    font-size: 1.3rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    border: 2px solid #1c1c1c; /* Borde oscuro */
+    border-radius: 20px; /* Bordes redondeados */
+    background-color: #1c1c1c; /* Fondo oscuro */
+    color: #ececec; /* Texto claro */
+    transition: all 0.3s ease; /* Suaviza las transiciones */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.cerrar:hover {
+    background-color: #333333; /* Fondo ligeramente más claro al pasar el cursor */
+    border-color: #ececec; /* Borde claro para contraste */
+    color: #fff; /* Texto blanco */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Incrementa la sombra */
+}
+
+.cerrar:active {
+    transform: scale(0.95); /* Simula un clic con un ligero escalado */
+    background-color: #000; /* Fondo más oscuro al hacer clic */
+}
+
+@media screen and (max-width: 750px) {
+.abrir-menu{
+    display: block;
+}
+
+.cerrar{
+    display: block;
+}
+.nav{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1c1c1c;
+    padding: 3rem;
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 3rem;
+    
+}
+.nav.visible{
+    opacity: 1;
+    visibility: visible;
+}
+.nav-list{
+flex-direction: column;
+align-items: end;
+}
+.nav-list li a{
+    color: white;
+}
+}
+

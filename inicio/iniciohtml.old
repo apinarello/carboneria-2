@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Inicio de Sesión - Carbonería</title>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Inicio de Sesión</h1>
+        <form action="../index.php" method="POST">  <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+                <span id="togglePassword" style="cursor: pointer;">👁️</span>
+                </div>            
+            <a href="../main/main.html" class="btn">ingresar</a>
+        </form>
+
+        <div id="message" class="message"></div>
+
+        <div class="forgot-password">
+            <a href="recuperar_contraseña.html">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <div class="footer">
+            © 2025 Carbonería23
+        </div>
+    </div>
+    <script src="cod.js"></script>
+</body>
+</html>
